@@ -1,0 +1,12 @@
+{
+  "esnext": true,
+  "globalstrict": true,
+  "globals": {
+    "describe": false,
+    "module": false,
+    "require": false,
+    "it": false
+  },
+
+  "expr": true
+}

@@ -1,0 +1,28 @@
+{
+  "name": "norwegian-input-validator",
+  "version": "0.1.0",
+  "description": "Simple input validator that supports norwegian formats and error messages",
+  "main": "norwegian-input-validator.js",
+  "devDependencies": {
+    "babelify": "^5.0.3",
+    "chai": "^2.0.0",
+    "jshint": "^2.6.0",
+    "jshint-stylish": "~1.0.0",
+    "karma": "^0.12.31",
+    "karma-browserify": "^3.0.2",
+    "karma-mocha": "^0.1.10",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "mocha": "^2.1.0"
+  },
+  "scripts": {
+    "test": "node_modules/karma/bin/karma start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:finn-no/norwegian-input-validator.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/finn-no/norwegian-input-validator/issues"
+  }
+}
