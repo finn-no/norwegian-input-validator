@@ -2,7 +2,6 @@
 
 function validateWithPattern(pattern) {
     return function (value) {
-        var fd;
         return pattern.test(value.trim());
     };
 }

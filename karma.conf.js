@@ -4,9 +4,9 @@ module.exports = function(karma) {
     karma.set({
         frameworks: ['mocha', 'browserify'],
         basePath: '.',
-        files:  ['*Test.js'],
+        files:  ['test/*Test.js'],
         preprocessors: {
-            '*Test.js': [ 'browserify' ]
+            'test/*Test.js': [ 'browserify' ]
         },
 
         browserify: {
