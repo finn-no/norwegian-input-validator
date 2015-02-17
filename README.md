@@ -13,7 +13,6 @@ const numberValidator = new Validator().number().required();
 
 numberValidator.validate("123").isValid() // =>true
 numberValidator.validate("").getErrorMessage() // => "Må fylles ut"
-};
 ```
 
 ## API
