@@ -1,11 +1,11 @@
 # norwegian-input-validator
 Simple input validator that supports norwegian formats and error messages
 
-# Install
+## Install
 ```bash
 npm install norwegian-input-validator --save
 ```
-# Usage
+## Usage
 
 ```javascript
 const Validator = require("norwegian-input-validator");
@@ -16,7 +16,7 @@ numberValidator.validate("").getErrorMessage() // => "Må fylles ut"
 };
 ```
 
-# API
+## API
 - new Validator()
 - validate(value): same validator
 - isValid(): true/false
