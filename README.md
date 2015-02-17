@@ -12,11 +12,9 @@ const Validator = require("norwegian-input-validator");
 const numberValidator = new Validator().number().required();
 
 numberValidator.validate("123").isValid()
-true
-
 numberValidator.validate("abc").getErrorMessage()
-
 };
+```
 
 # API
 - new Validator()
