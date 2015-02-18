@@ -1,6 +1,6 @@
 {
   "name": "norwegian-input-validator",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Simple input validator that supports norwegian formats and error messages",
   "main": "norwegian-input-validator.es5.js",
   "devDependencies": {
