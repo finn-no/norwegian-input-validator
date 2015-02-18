@@ -17,7 +17,7 @@ numberValidator.validate("").getErrorMessage() // => "Må fylles ut"
 new Validator().phoneNumber().validate("123").isValid() // => false
 ```
 
-## Custom error message
+## Custom error messages
 ```javascript
 new Validator().required("My error message").validate("").getErrorMessage() // => "My error message"
 ```
