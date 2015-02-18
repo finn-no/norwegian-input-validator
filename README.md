@@ -24,20 +24,20 @@ new Validator().required("My error message").validate("").getErrorMessage() // =
 
 ## API
 * Core
-** new Validator()
-** validate(value): same validator
-** isValid(): true/false
-** isRequired(): true/false
-** getErrorMessage(): error message
+  * new Validator()
+  * validate(value): same validator
+  * isValid(): true/false
+  * isRequired(): true/false
+  * getErrorMessage(): error message
 * Validator rules
-** required(customErrorMessage): new Validator
-** phoneNumber(customErrorMessage): new Validator
-** emailAddress(customErrorMessage): new Validator
-** maxLength(max, customErrorMessage): new Validator
-** postalNumber(customErrorMessage): new Validator
-** number(customErrorMessage): new Validator
-** url(customErrorMessage): new Validator
-** atLeastTwoWords(customErrorMessage): new Validator
-** atLeastThreeWords(customErrorMessage): new Validator
-** orgNumber(customErrorMessage): new Validator
-** pattern(regexp, customErrorMessage): new Validator
+  * required(customErrorMessage): new Validator
+  * phoneNumber(customErrorMessage): new Validator
+  * emailAddress(customErrorMessage): new Validator
+  * maxLength(max, customErrorMessage): new Validator
+  * postalNumber(customErrorMessage): new Validator
+  * number(customErrorMessage): new Validator
+  * url(customErrorMessage): new Validator
+  * atLeastTwoWords(customErrorMessage): new Validator
+  * atLeastThreeWords(customErrorMessage): new Validator
+  * orgNumber(customErrorMessage): new Validator
+  * pattern(regexp, customErrorMessage): new Validator
