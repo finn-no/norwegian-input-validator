@@ -24,12 +24,11 @@ new Validator().required("My error message").validate("").getErrorMessage() // =
 
 ## API
 * Core
-  * new Validator()
   * validate(value): same validator
   * isValid(): true/false
   * isRequired(): true/false
   * getErrorMessage(): error message
-* Validator rules
+* Rules
   * required(customErrorMessage): new Validator
   * phoneNumber(customErrorMessage): new Validator
   * emailAddress(customErrorMessage): new Validator
