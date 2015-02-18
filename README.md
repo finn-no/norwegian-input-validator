@@ -22,9 +22,9 @@ new Validator().phoneNumber().validate("123").isValid() // => false
 new Validator().required("My error message").validate("").getErrorMessage() // => "My error message"
 ```
 
-## API
+## Validator methods
 * Core
-  * validate(value): same validator
+  * validate(value): validates and returns same validator
   * isValid(): true/false
   * isRequired(): true/false
   * getErrorMessage(): error message
