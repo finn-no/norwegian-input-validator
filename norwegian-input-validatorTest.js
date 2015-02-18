@@ -1,6 +1,6 @@
 "use strict";
 
-const Validator = require("../src/norwegian-input-validator");
+const Validator = require("./norwegian-input-validator");
 const expect = require("chai").expect;
 
 describe("validation", function () {

@@ -2,7 +2,7 @@
   "name": "norwegian-input-validator",
   "version": "0.1.0",
   "description": "Simple input validator that supports norwegian formats and error messages",
-  "main": "dist/norwegian-input-validator.es5.js",
+  "main": "norwegian-input-validator.es5.js",
   "devDependencies": {
     "babel": "^4.1.1",
     "babelify": "^5.0.3",
@@ -17,7 +17,7 @@
   },
   "scripts": {
     "test": "node_modules/karma/bin/karma start",
-    "prepublish": "./node_modules/.bin/babel src/norwegian-input-validator.js -o dist/norwegian-input-validator.es5.js"
+    "prepublish": "./node_modules/.bin/babel norwegian-input-validator.js -o norwegian-input-validator.es5.js"
   },
   "repository": {
     "type": "git",
