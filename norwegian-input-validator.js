@@ -108,7 +108,6 @@ class Validator {
         });
     }
 
-
     url(customErrorMessage) {
         return this._newValidator({
             isValid: validateWithPattern(/^[^ ]+\.[^ ]+$/),

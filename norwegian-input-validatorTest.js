@@ -206,7 +206,7 @@ describe("validation", function () {
                     if (value === "1") {
                         return "1 is not allowed";
                     }
-                    return "Something is not allowed"
+                    return "Something is not allowed";
                 };
                 expect(new Validator().phoneNumber(customErrorMessageFn).validate("1").getErrorMessage()).to.be.equal("1 is not allowed");
                 expect(new Validator().phoneNumber(customErrorMessageFn).validate("123").getErrorMessage()).to.be.equal("Something is not allowed");
