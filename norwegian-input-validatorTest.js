@@ -5,7 +5,7 @@ const expect = require("chai").expect;
 
 describe("validation", function () {
 
-    it("Should throw error when not being validated", () => {
+    it("Should fail fast on isValid() when not being validated", () => {
         expect(() => {
             new Validator().phoneNumber().isValid();
         }).to.throw("Not validated");
@@ -30,10 +30,6 @@ describe("validation", function () {
             expect(new Validator().phoneNumber().validate("+0047 78978978").isValid()).to.be.false;
             expect(new Validator().phoneNumber().validate("12345").isValid()).to.be.false;
             expect(new Validator().phoneNumber().validate("12345").getErrorMessage()).to.be.equal("Ugyldig telefonnummer");
-        });
-
-        it("should use custom error message", () => {
-            expect(new Validator().phoneNumber("custom message").validate("12345").getErrorMessage()).to.be.equal("custom message");
         });
     });
 
@@ -160,5 +156,61 @@ describe("validation", function () {
             expect(new Validator().pattern(/\d+/).validate("hello", "should be digit").isValid()).to.be.false;
             expect(new Validator().pattern(/\d+/, "should be digit").validate("hello").getErrorMessage()).to.be.equal("should be digit");
         });
+    });
+
+    describe("boolean", () => {
+        it("should pass for correct true/false", () => {
+            expect(new Validator().boolean().validate(true).isValid()).to.be.true;
+            expect(new Validator().boolean().validate(false).isValid()).to.be.true;
+        });
+
+        it("should fail for not true/false", () => {
+            expect(new Validator().boolean().validate("Some text").isValid()).to.be.false;
+        });
+
+        it("should fail when required and not provided", () => {
+            expect(new Validator().boolean().validate("Some text").isValid()).to.be.false;
+        });
+    });
+
+    describe("allow", () => {
+        it("should pass for allowd true", () => {
+            expect(new Validator().allow(true).validate(true).isValid()).to.be.true;
+            expect(new Validator().allow("abc").validate("abc").isValid()).to.be.true;
+        });
+
+        it("should fail for not alowed true/false", () => {
+            expect(new Validator().allow(true).validate(false).isValid()).to.be.false;
+            expect(new Validator().allow("abc").validate("ABC").isValid()).to.be.false;
+            expect(new Validator().allow(true).validate(false).getErrorMessage()).to.be.equal("Ugyldig verdi");
+        });
+
+        it("should fail required before testing for allow", () => {
+            expect(new Validator().allow(true).required().validate(null).isValid()).to.be.false;
+            expect(new Validator().allow(true).required().validate(null).getErrorMessage()).to.be.equal("Må fylles ut");
+        });
+
+        it("should pass required and allowed", () => {
+            expect(new Validator().allow(true).required().validate(true).isValid()).to.be.true;
+        });
+
+    });
+
+    describe("custom error message", () => {
+        it("should use custom error message", () => {
+            expect(new Validator().phoneNumber("custom message").validate("12345").getErrorMessage()).to.be.equal("custom message");
+        });
+
+        it("should use custom error message as function", () => {
+                var customErrorMessageFn = (value) => {
+                    if (value === "1") {
+                        return "1 is not allowed";
+                    }
+                    return "Something is not allowed"
+                };
+                expect(new Validator().phoneNumber(customErrorMessageFn).validate("1").getErrorMessage()).to.be.equal("1 is not allowed");
+                expect(new Validator().phoneNumber(customErrorMessageFn).validate("123").getErrorMessage()).to.be.equal("Something is not allowed");
+            }
+        );
     });
 });

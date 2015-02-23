@@ -12,9 +12,11 @@ const Validator = require("norwegian-input-validator");
 const numberValidator = new Validator().number().required();
 
 numberValidator.validate("123").isValid() // => true
-numberValidator.validate("").getErrorMessage() // => "Må fylles ut"
+numberValidator.validate("abc").isValid() // => false
+numberValidator.validate("abc").getErrorMessage() // => "Må være tall"
 
-new Validator().phoneNumber().validate("123").isValid() // => false
+//required
+numberValidator.validate("").getErrorMessage() // => "Må fylles ut"
 ```
 
 ## Custom error messages
@@ -28,7 +30,7 @@ new Validator().required("My error message").validate("").getErrorMessage() // =
   * isValid(): true/false
   * isRequired(): true/false
   * getErrorMessage(): error message
-* Rules
+* Validator rules
   * required(customErrorMessage): new Validator
   * phoneNumber(customErrorMessage): new Validator
   * emailAddress(customErrorMessage): new Validator
@@ -40,3 +42,4 @@ new Validator().required("My error message").validate("").getErrorMessage() // =
   * atLeastThreeWords(customErrorMessage): new Validator
   * orgNumber(customErrorMessage): new Validator
   * pattern(regexp, customErrorMessage): new Validator
+  * allow(someValue, customErrorMessage): new Validator

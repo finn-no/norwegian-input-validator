@@ -6,26 +6,40 @@ function validateWithPattern(pattern) {
     };
 }
 
+function isEmptyString(value) {
+    return typeof value === "string" && value.trim() === "";
+}
+
+function isEmptyNumber(value) {
+    return typeof value === "number" && value.trim() === "";
+}
+
+function getErrorMessageViaFn(customErrorMessage, value) {
+    return typeof customErrorMessage === "function" ? customErrorMessage(value) : customErrorMessage;
+}
+
 class Validator {
-    constructor(rules = [], options = {}) {
-        this._rules = rules;
+    constructor(validations = [], options = {}) {
+        this._validations = validations;
         this._options = options;
     }
 
     validate(value) {
         this._valid = true;
 
-        if (this._options.required && value.trim() === "") {
+        if (this._options.required && (value === null || isEmptyString(value) || isEmptyNumber(value))) {
             this._valid = false;
-            this._errorMessage = this._options.requiredCustomErrorMessage || "Må fylles ut";
-        } else if (value.trim() !== "") {
-            const failedRules = this._rules.filter(rule => !rule.isValid(value));
+            this._errorMessage = getErrorMessageViaFn(this._options.requiredCustomErrorMessage, value) || "Må fylles ut";
+            return this;
+        } else if (!isEmptyString(value) && !isEmptyNumber(value)) {
+            const failedValidations = this._validations.filter(validation => !validation.isValid(value));
 
-            if (failedRules.length > 0) {
+            if (failedValidations.length > 0) {
                 this._valid = false;
-                this._errorMessage = failedRules[0].errorMessage;
+                this._errorMessage = getErrorMessageViaFn(failedValidations[0].errorMessage, value);
             }
         }
+
         return this;
     }
 
@@ -45,7 +59,7 @@ class Validator {
     }
 
     required(customErrorMessage) {
-        return new Validator(this._rules, {required: true, requiredCustomErrorMessage: customErrorMessage});
+        return new Validator(this._validations, {required: true, requiredCustomErrorMessage: customErrorMessage});
     }
 
     phoneNumber(customErrorMessage) {
@@ -85,6 +99,16 @@ class Validator {
         });
     }
 
+    boolean(customErrorMessage) {
+        return this._newValidator({
+            isValid: (value) => {
+                return typeof value === "boolean";
+            },
+            errorMessage: customErrorMessage || "Må være tall"
+        });
+    }
+
+
     url(customErrorMessage) {
         return this._newValidator({
             isValid: validateWithPattern(/^[^ ]+\.[^ ]+$/),
@@ -122,8 +146,17 @@ class Validator {
         });
     }
 
+    allow(someValue, customErrorMessage) {
+        return this._newValidator({
+            isValid(value) {
+                return someValue === value;
+            },
+            errorMessage: customErrorMessage || "Ugyldig verdi"
+        });
+    }
+
     _newValidator(rule) {
-        return new Validator(this._rules.concat([rule]), this._options);
+        return new Validator(this._validations.concat([rule]), this._options);
     }
 }
 
